@@ -1,0 +1,149 @@
+package bt;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class KhachHang {
+    protected String maKhachHang;
+    protected String hoTen;
+    protected String ngayRaHoaDon;
+    protected int soLuong;
+    protected double donGia;
+
+    public KhachHang(String maKhachHang, String hoTen, String ngayRaHoaDon, int soLuong, double donGia) {
+        this.maKhachHang = maKhachHang;
+        this.hoTen = hoTen;
+        this.ngayRaHoaDon = ngayRaHoaDon;
+        this.soLuong = soLuong;
+        this.donGia = donGia;
+    }
+
+    public double tinhThanhTien() {
+        return soLuong * donGia;
+    }
+
+    public void hienThiThongTin() {
+        System.out.println("Mã khách hàng: " + maKhachHang);
+        System.out.println("Họ tên: " + hoTen);
+        System.out.println("Ngày ra hoá đơn: " + ngayRaHoaDon);
+        System.out.println("Số lượng: " + soLuong);
+        System.out.println("Đơn giá: " + donGia);
+    }
+}
+
+class KhachHangVietNam extends KhachHang {
+    private String doiTuong;
+    private int dinhMuc;
+
+    public KhachHangVietNam(String maKhachHang, String hoTen, String ngayRaHoaDon, int soLuong, double donGia, String doiTuong, int dinhMuc) {
+        super(maKhachHang, hoTen, ngayRaHoaDon, soLuong, donGia);
+        this.doiTuong = doiTuong;
+        this.dinhMuc = dinhMuc;
+    }
+
+    @Override
+    public double tinhThanhTien() {
+        if (soLuong <= dinhMuc) {
+            return soLuong * donGia;
+        } else {
+            return soLuong * donGia * dinhMuc + (soLuong - dinhMuc) * donGia * 2.5;
+        }
+    }
+
+    @Override
+    public void hienThiThongTin() {
+        super.hienThiThongTin();
+        System.out.println("Đối tượng khách hàng: " + doiTuong);
+        System.out.println("Định mức: " + dinhMuc);
+    }
+}
+
+class KhachHangNuocNgoai extends KhachHang {
+    private String quocTich;
+
+    public KhachHangNuocNgoai(String maKhachHang, String hoTen, String ngayRaHoaDon, int soLuong, double donGia, String quocTich) {
+        super(maKhachHang, hoTen, ngayRaHoaDon, soLuong, donGia);
+        this.quocTich = quocTich;
+    }
+
+    @Override
+    public double tinhThanhTien() {
+        return soLuong * donGia;
+    }
+
+    @Override
+    public void hienThiThongTin() {
+        super.hienThiThongTin();
+        System.out.println("Quốc tịch: " + quocTich);
+    }
+}
+
+public class QuanLyHoaDon {
+  package bt;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class QuanLyHoaDon {
+    public static void main(String[] args) {
+        List<KhachHang> danhSachHoaDon = new ArrayList<>();
+
+        // Thêm khách hàng Việt Nam
+        KhachHangVietNam khachHangVietNam1 = new KhachHangVietNam("KH001", "Nguyễn Văn A", "01/09/2013", 200, 5000, "Sinh hoạt", 150);
+        danhSachHoaDon.add(khachHangVietNam1);
+
+        KhachHangVietNam khachHangVietNam2 = new KhachHangVietNam("KH002", "Trần Thị B", "15/09/2013", 300, 6000, "Sản xuất", 200);
+        danhSachHoaDon.add(khachHangVietNam2);
+
+        // Thêm khách hàng nước ngoài
+        KhachHangNuocNgoai khachHangNuocNgoai1 = new KhachHangNuocNgoai("KH003", "John Smith", "10/09/2013", 150, 7000, "USA");
+        danhSachHoaDon.add(khachHangNuocNgoai1);
+
+        KhachHangNuocNgoai khachHangNuocNgoai2 = new KhachHangNuocNgoai("KH004", "Maria García", "25/09/2013", 250, 8000, "Spain");
+        danhSachHoaDon.add(khachHangNuocNgoai2);
+
+        // Tổng số lượng từng loại khách hàng
+        int tongSoLuongKhachHangVietNam = 0;
+        int tongSoLuongKhachHangNuocNgoai = 0;
+
+        // Tính tổng số lượng khách hàng Việt Nam và nước ngoài
+        for (KhachHang khachHang : danhSachHoaDon) {
+            if (khachHang instanceof KhachHangVietNam) {
+                tongSoLuongKhachHangVietNam++;
+            } else if (khachHang instanceof KhachHangNuocNgoai) {
+                tongSoLuongKhachHangNuocNgoai++;
+            }
+        }
+        System.out.println("Tổng số lượng khách hàng Việt Nam: " + tongSoLuongKhachHangVietNam);
+        System.out.println("Tổng số lượng khách hàng nước ngoài: " + tongSoLuongKhachHangNuocNgoai);
+
+        // Tính tổng thành tiền của khách hàng nước ngoài
+        double tongThanhTienKhachHangNuocNgoai = 0;
+
+        for (KhachHang khachHang : danhSachHoaDon) {
+            if (khachHang instanceof KhachHangNuocNgoai) {
+                tongThanhTienKhachHangNuocNgoai += khachHang.tinhThanhTien();
+            }
+        }
+
+             double trungBinhThanhTienKhachHangNuocNgoai = tongThanhTienKhachHangNuocNgoai / tongSoLuongKhachHangNuocNgoai;
+        System.out.println("Tỉnh trung bình thành tiền của khách hàng nước ngoài: " + trungBinhThanhTienKhachHangNuocNgoai);
+
+        // Xuất ra các hóa đơn trong tháng 09 năm 2013
+        System.out.println("Các hoá đơn trong tháng 09 năm 2013:");
+
+        for (KhachHang khachHang : danhSachHoaDon) {
+            String[] ngayRaHoaDon = khachHang.ngayRaHoaDon.split("/");
+            int thang = Integer.parseInt(ngayRaHoaDon[1]);
+            int nam = Integer.parseInt(ngayRaHoaDon[2]);
+
+            if (thang == 9 && nam == 2013) {
+                khachHang.hienThiThongTin();
+                System.out.println("Thành tiền: " + khachHang.tinhThanhTien());
+                System.out.println();
+            }
+        }
+    }
+}
+
+
