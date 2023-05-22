@@ -1,0 +1,53 @@
+package bt3;
+import java.util.List;
+import java.util.ArrayList;
+public class DiemHocVien {
+    private String hoTen;
+    private int namSinh;
+    private List<Integer> diemMonHoc;
+
+    public DiemHocVien(String hoTen, int namSinh, List<Integer> diemMonHoc) {
+        this.hoTen = hoTen;
+        this.namSinh = namSinh;
+        this.diemMonHoc = diemMonHoc;
+    }
+
+    public String getHoTen() {
+        return hoTen;
+    }
+
+    public int getNamSinh() {
+        return namSinh;
+    }
+
+    public List<Integer> getDiemMonHoc() {
+        return diemMonHoc;
+    }
+
+    public double tinhDiemTrungBinh() {
+        int sum = 0;
+        for (int diem : diemMonHoc) {
+            sum += diem;
+        }
+        return (double) sum / diemMonHoc.size();
+    }
+
+    public boolean coMonDuoi5Diem() {
+        for (int diem : diemMonHoc) {
+            if (diem < 5) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean coMonDuoi7Diem() {
+        for (int diem : diemMonHoc) {
+            if (diem < 7) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+    
