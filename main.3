@@ -1,0 +1,45 @@
+package bt3;
+import java.util.List;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+public class Main {
+public static void main(String[] args) {
+    // Tạo danh sách điểm học viên
+    List<DiemHocVien> hocVienList = new ArrayList<>();
+
+    // Thêm dữ liệu học viên
+    hocVienList.add(new DiemHocVien("Nguyễn Văn A", 1995, Arrays.asList(8, 7, 9, 6, 8)));
+    hocVienList.add(new DiemHocVien("Trần Thị B", 1998, Arrays.asList(7, 6, 5, 7, 6)));
+    hocVienList.add(new DiemHocVien("Lê Văn C", 1996, Arrays.asList(6, 8, 7, 9, 8)));
+    hocVienList.add(new DiemHocVien("Phạm Thị D", 1997, Arrays.asList(8, 7, 8, 6, 5)));
+    hocVienList.add(new DiemHocVien("Hoàng Văn E", 1999, Arrays.asList(7, 7, 7, 7, 7)));
+
+    // Biến đếm
+    int luatNhan = 0;
+    int thiTotNghiep = 0;
+    int thiLai = 0;
+    List<String> monThiLai = new ArrayList<>();
+
+    // Xét điều kiện cho từng học viên
+    for (DiemHocVien hocVien : hocVienList) {
+        double diemTrungBinh = hocVien.tinhDiemTrungBinh();
+        boolean coMonDuoi5Diem = hocVien.coMonDuoi5Diem();
+        boolean coMonDuoi7Diem = hocVien.coMonDuoi7Diem();
+        if (diemTrungBinh > 7 && !coMonDuoi5Diem) {
+            luatNhan++;
+        } else if (diemTrungBinh <= 7 && !coMonDuoi7Diem) {
+            thiTotNghiep++;
+        } else {
+            thiLai++;
+            monThiLai.add(hocVien.getHoTen());
+        }
+    }
+
+    // In thông tin
+    System.out.println("Số người được làm luận văn tốt nghiệp: " + luatNhan);
+    System.out.println("Số người thi tốt nghiệp: " + thiTotNghiep);
+    System.out.println("Số người phải thi lại: " + thiLai);
+    System.out.println("Danh sách hs thi lại: " + monThiLai);
+}
+}
