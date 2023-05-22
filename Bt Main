@@ -1,0 +1,32 @@
+package bt1;
+
+public class Main {
+
+
+	
+	    public static void main(String[] args) {
+	    	MayTinh mayTinh = new MayTinh();
+	    	MayTinh.Desktop desktop = mayTinh.new Desktop("Dell", 1500, 500);
+	    	MayTinh.Laptop laptop = mayTinh.new Laptop("Lenovo", 1200, 8);
+	    	MayTinh.Tablet tablet = mayTinh.new Tablet("Samsung", 800, 10);
+
+
+	        desktop.displayInfo();
+	        desktop.turnOn();
+	        desktop.turnOff();
+
+	        System.out.println("----------------------");
+
+	        laptop.displayInfo();
+	        laptop.turnOn();
+	        laptop.turnOff();
+
+	        System.out.println("----------------------");
+
+	        tablet.displayInfo();
+	        tablet.turnOn();
+	        tablet.turnOff();
+	    }
+	}
+
+
